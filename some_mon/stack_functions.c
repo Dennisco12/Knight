@@ -15,6 +15,7 @@ void _push(stack_t1 **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
+	printf("This is push function\n");
 	new = malloc(sizeof(stack_t1));
 
 	new->n = global_argument;
@@ -33,7 +34,6 @@ void _pall(stack_t1 **stack, unsigned int line_number)
 	temp = *stack;
 	if (!temp)
 	{
-		dprintf(2, "Empty stack");
 		exit(EXIT_FAILURE);
 	}
 
@@ -53,7 +53,7 @@ void _swap(stack_t1 **stack, unsigned int line_number)
 
 	if (!head)
 	{
-		dprintf(2, "L%d: empty stack", line_number);
+		dprintf(2, "L%d: empty stack\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 
@@ -62,12 +62,12 @@ void _swap(stack_t1 **stack, unsigned int line_number)
 
 	if (head->next == NULL)
 	{
-		dprintf(2, "stack too short");
+		dprintf(2, "L%d: can't swap,stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 
 	head->n = temp;
-	head->n = (head-next)->n;
+	head->n = (head->next)->n;
 	(head->next)->n = temp;
 }
 
@@ -78,7 +78,7 @@ void _pint(stack_t1 **stack, unsigned int line_number)
 	temp = *stack;
 	if (!temp)
 	{
-		dprintf(2, "L%d: can't pint, stack empty", line_number);
+		dprintf(2, "L%d: can't pint, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 
