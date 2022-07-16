@@ -9,13 +9,23 @@ int main(int argc, char *argv[])
 	}
 
 	char *buffer;
-	char *str;
+	char **str;
 	stack_t1 **stack;
 	unsigned int line_number;
 
 	buffer = read_file(argv[1]);
+	//printf("%s\n", buffer);
 	str = tokenise(buffer, stack, line_number);
-	get_op(str, stack, line_number);
+	/*while (str->prev != NULL)
+		str = str->prev;*/
+
+	printf("head gotten successfully\n");
+	/*while (str != NULL)
+	{
+		printf("%s\n", str->opcode);
+		str = str->next;
+	}*/
+	//get_op(str, stack, line_number);
 
 	free(stack);
 

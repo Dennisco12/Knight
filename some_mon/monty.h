@@ -49,6 +49,7 @@ typedef struct opcodes_s
 {
 	char *opcode;
 	struct opcodes_s *next;
+	struct opcodes_s *prev;
 } opcode_t;
 
 
@@ -56,7 +57,7 @@ extern int global_argument;
 extern char *global_opcode;
 
 char *read_file(char *filename);
-char *tokenise(char *str, stack_t1 **stack, unsigned int line_number);
+char **tokenise(char *str, stack_t1 **stack, unsigned int line_number);
 void get_op(char *str, stack_t1 **stack, unsigned int line_number);
 int push_func(char *token_line);
 

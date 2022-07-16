@@ -15,7 +15,7 @@ void _push(stack_t1 **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	printf("This is push function\n");
+	printf("push function called\n");
 	new = malloc(sizeof(stack_t1));
 
 	new->n = global_argument;
@@ -98,7 +98,7 @@ void _pop(stack_t1 **stack, unsigned int line_number)
 	}
 
 	temp = first->next;
-	temp->prev == NULL;
+	temp->prev = NULL;
 	first->next = NULL;
 
 	*stack = temp;
