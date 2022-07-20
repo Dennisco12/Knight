@@ -1,5 +1,7 @@
 #include "monty.h"
 
+char **push_args;
+
 int main(int argc, char *argv[])
 {
 	if (argc != 2)
@@ -9,17 +11,23 @@ int main(int argc, char *argv[])
 	}
 
 	char *buffer;
-	char **str;
-	stack_t1 **stack;
+	stack_t1 *stack;
 	unsigned int line_number;
+	int i = 0;
+	int *str;
 
+	stack = NULL;
 	buffer = read_file(argv[1]);
 	//printf("%s\n", buffer);
-	str = tokenise(buffer, stack, line_number);
+	tokenise(buffer, &stack, line_number);
+	/*while (str)
+	{
+		push_arg[i] = str[i];
+		i++;
+	}*/
 	/*while (str->prev != NULL)
 		str = str->prev;*/
 
-	printf("head gotten successfully\n");
 	/*while (str != NULL)
 	{
 		printf("%s\n", str->opcode);
@@ -27,7 +35,8 @@ int main(int argc, char *argv[])
 	}*/
 	//get_op(str, stack, line_number);
 
-	free(stack);
+	printf("program completed\n");
+	freelist(stack);
 
 	return (0);
 }

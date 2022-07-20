@@ -24,55 +24,76 @@ char *read_file(char *filename)
 	return (buffer);
 }
 
-char **tokenise(char *buffer, stack_t1 **stack, unsigned int line_number)
+void tokenise(char *buffer, stack_t1 **stack, unsigned int line_number)
 {
 	char *token_line;
 	char *token_str;
 	instruction_t func;
-	char *line_arr[1024];
-	char *str_arr[1024];
-	int j = 0;
-	opcode_t *temp;
-	opcode_t *new;
+	char *line_arr[50];
+	char *str_arr[50];
+	char *exp[50];
+	int j = 0, n = 0;
+	//char **push_args;
+	char *second;
+	char *k = "-1", arg;
 
-	new = malloc(sizeof(opcode_t));
-	if (!new)
-		printf("malloc failed\n");
-
-	//temp = malloc(sizeof(opcode_t));
 	line_number = 1;
 	token_line = strtok(buffer, "\n");
 	line_arr[j] = token_line;
+	printf("first line: %s\n", line_arr[0]);
 	j++;
-	while (token_line != NULL)
+	while (token_line)
 	{
 		token_line = strtok(NULL, "\n");
 		line_arr[j] = token_line;
+		printf("next line: %s\n", line_arr[j]);
 		j++;
 	}
-	//printf("%s\n", token_line);
-	//token_str = strtok(NULL, "\n");
-	//printf("%s: remaining buffer\n", token_str);
 	j = 0;
-	while (line_arr[j] != NULL)
+	while (line_arr[j])
 	{
-		push_func(line_arr[j]);
-		token_str = strtok(line_arr[j], " ");
-		str_arr[j] = token_str;
-		printf("successfully read %s\n", token_str);
-		if (token_line == NULL)
+		if (line_arr[j] == NULL)
 		{
 			dprintf(2, "L%d: line empty\n", j + 1);
 			break;
 		}
+		token_str = strtok(line_arr[j], " ");
+		str_arr[j] = token_str;
+		if (strcmp("push", token_str) == 0){
+		second = strtok(NULL, " ");
+		printf("%s stored successfully\n", second);
+		if (second == NULL || int_check(second) == 0)
+		{
+			printf("push argument invalid\n");
+			push_args[j] = k;
+		}
+		else
+		{
+			printf("%d: argument valid\n", atoi(second));
+			exp[j] = second;
+			printf("argument stored\n");
+		}}
+		printf("\"%s\" has been stored into array\n", str_arr[j]);
 		j++;
 	}
-	return (str_arr[]);
+	n = 0;
+	printf("push args are: ");
+	while (exp[n])
+	{
+		push_args[n] = exp[n];
+		printf("%s, ", push_args[n]);
+		n++;
+	}
+	printf("\n");
+	printf("array completely assigned, now taken to get_op\n");
+	get_op(str_arr, stack);
+	return;
 }
 
-void get_op(char *str, stack_t1 **stack, unsigned int line_number)
+void get_op(char **str, stack_t1 **stack)
 {
 	int i = 0;
+	int j = 0, k = 0;
 	void (*oper)(stack_t1 **, unsigned int);
 	instruction_t function[] = {
 		{"push", _push},
@@ -84,23 +105,33 @@ void get_op(char *str, stack_t1 **stack, unsigned int line_number)
 		{NULL, NULL},
 	};
 
+	printf("get_op function started\n");
 	if (str == NULL)
 	{
 		dprintf(2, "no instruction found\n");
 		exit(EXIT_FAILURE);
 	}
-	else
+	printf("array is not empty\n");
+	printf("\n");
+	while (str[j])
 	{
+		printf("checking \"%s\" against \n", str[j]);
+		i = 0;
 		while (function[i].opcode)
 		{
-			if (strcmp(str, function[i].opcode) == 0)
+			printf("%s\n", function[i].opcode);
+			if (strcmp(str[j], function[i].opcode) == 0)
 			{
 				printf("code starts\n");
 				oper = function[i].f;
 				printf("Command completed\n");
+				break;
 			}
 			i++;
 		}
-		oper(stack, line_number);
-	}   
+		oper(stack, j + 1);
+		printf("operation succesfully executed\n");
+		j++;
+	}
+	return;
 }

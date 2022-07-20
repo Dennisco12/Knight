@@ -40,27 +40,16 @@ typedef struct instruction_s
         void (*f)(stack_t1 **stack, unsigned int line_number);
 } instruction_t;
 
-
-/**
- * struct opcodes_s - a list containing all the opcodes in a file
- * @code: The opcode strings
- */
-typedef struct opcodes_s
-{
-	char *opcode;
-	struct opcodes_s *next;
-	struct opcodes_s *prev;
-} opcode_t;
-
-
-extern int global_argument;
-extern char *global_opcode;
+extern char **push_args;
 
 char *read_file(char *filename);
-char **tokenise(char *str, stack_t1 **stack, unsigned int line_number);
-void get_op(char *str, stack_t1 **stack, unsigned int line_number);
+void tokenise(char *str, stack_t1 **stack, unsigned int line_number);
+void get_op(char **str, stack_t1 **stack);
 int push_func(char *token_line);
+int int_check(char *str);
+void freelist(stack_t1 *stack);
 
+	/*stack functions*/
 void _push(stack_t1 **stack, unsigned int line_number);
 void _pall(stack_t1 **stack, unsigned int line_number);
 void _pop(stack_t1 **stack, unsigned int line_number);

@@ -1,5 +1,5 @@
-  push 1 wow
-pint 2 schooling
-push 3
+  push 5 wow
+push 9 schooling
+push 2
 pall
 pint this func printf the top

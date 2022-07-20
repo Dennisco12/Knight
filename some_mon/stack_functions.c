@@ -4,24 +4,35 @@ void _push(stack_t1 **stack, unsigned int line_number)
 {
 	stack_t1 *temp;
 	stack_t1 *new;
-	int global_argument;
-	(void)line_number;
+	int n = 0;
+	char *arg;
+	//int *push_arg;
 
 	temp = *stack;
-
-	if (!temp)
+	new = malloc(sizeof(stack_t1));
+	/*if (!temp)
 	{
-		dprintf(2, "Empty stack");
+		dprintf(2, "Empty stack\n");
 		exit(EXIT_FAILURE);
-	}
+	}*/
 
 	printf("push function called\n");
-	new = malloc(sizeof(stack_t1));
 
-	new->n = global_argument;
+	printf("push args recieved: ");
+	while (push_args[n])
+	{
+		printf("%s, ", push_args[n]);
+		n++;
+	}
+	printf("\n");
+	printf("push arg: %s\n", push_args[line_number - 1]);
+	printf("line number assigned: %d\n", line_number);
+	arg = push_args[line_number - 1];
+	new->n = atoi(arg);
 	new->prev = NULL;
 	new->next = temp;
-	temp->prev = new;
+	if (temp != NULL)
+		temp->prev = new;
 
 	*stack = new;
 }
@@ -31,9 +42,17 @@ void _pall(stack_t1 **stack, unsigned int line_number)
 	stack_t1 *temp;
 	(void)line_number;
 
+	printf("pall function called\n");
+	temp = malloc(sizeof(stack_t1));
+	if (!temp)
+	{
+		dprintf(2, "malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
 	temp = *stack;
 	if (!temp)
 	{
+		dprintf(2, "Empty list\n");
 		exit(EXIT_FAILURE);
 	}
 
@@ -51,7 +70,8 @@ void _swap(stack_t1 **stack, unsigned int line_number)
 
 	head = *stack;
 
-	if (!head)
+	printf("swap function called\n");
+	if (!(*stack))
 	{
 		dprintf(2, "L%d: empty stack\n", line_number);
 		exit(EXIT_FAILURE);
@@ -75,6 +95,7 @@ void _pint(stack_t1 **stack, unsigned int line_number)
 {
 	stack_t1 *temp;
 
+	printf("pint function called\n");
 	temp = *stack;
 	if (!temp)
 	{
@@ -82,7 +103,7 @@ void _pint(stack_t1 **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	printf("%d", temp->n);
+	printf("%d\n", temp->n);
 }
 
 void _pop(stack_t1 **stack, unsigned int line_number)
@@ -90,6 +111,7 @@ void _pop(stack_t1 **stack, unsigned int line_number)
 	stack_t1 *temp;
 	stack_t1 *first;
 
+	printf("pop function called\n");
 	first = *stack;
 	if (!first)
 	{
@@ -109,6 +131,7 @@ void _add(stack_t1 **stack, unsigned int line_number)
 	stack_t1 *temp;
 	int p, s;
 
+	printf("add function called\n");
 	temp = *stack;
 	if (!temp)
 	{
