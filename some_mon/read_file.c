@@ -83,6 +83,7 @@ void get_op(char **str, stack_t1 *stack)
 		{"pint", _pint},
 		{"pop", _pop},
 		{"add", _add},
+		{"sub", _sub},
 		{NULL, NULL},
 	};
 
