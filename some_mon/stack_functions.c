@@ -6,28 +6,16 @@ void _push(stack_t1 **stack, unsigned int line_number)
 	stack_t1 *new;
 	int n = 0;
 	char *arg;
-	//int *push_arg;
 
 	temp = *stack;
 	new = malloc(sizeof(stack_t1));
-	/*if (!temp)
-	{
-		dprintf(2, "Empty stack\n");
-		exit(EXIT_FAILURE);
-	}*/
 
-	printf("push function called\n");
-
-	printf("push args recieved: ");
-	while (push_args[n])
-	{
-		printf("%s, ", push_args[n]);
-		n++;
-	}
-	printf("\n");
-	printf("push arg: %s\n", push_args[line_number - 1]);
-	printf("line number assigned: %d\n", line_number);
 	arg = push_args[line_number - 1];
+	if (atoi(arg) == -1)
+	{
+		dprintf(2, "L%d: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
+	}
 	new->n = atoi(arg);
 	new->prev = NULL;
 	new->next = temp;
@@ -42,7 +30,6 @@ void _pall(stack_t1 **stack, unsigned int line_number)
 	stack_t1 *temp;
 	(void)line_number;
 
-	printf("pall function called\n");
 	temp = malloc(sizeof(stack_t1));
 	if (!temp)
 	{
@@ -70,7 +57,6 @@ void _swap(stack_t1 **stack, unsigned int line_number)
 
 	head = *stack;
 
-	printf("swap function called\n");
 	if (!(*stack))
 	{
 		dprintf(2, "L%d: empty stack\n", line_number);
@@ -86,7 +72,7 @@ void _swap(stack_t1 **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 
-	head->n = temp;
+	temp = head->n;
 	head->n = (head->next)->n;
 	(head->next)->n = temp;
 }
@@ -95,7 +81,6 @@ void _pint(stack_t1 **stack, unsigned int line_number)
 {
 	stack_t1 *temp;
 
-	printf("pint function called\n");
 	temp = *stack;
 	if (!temp)
 	{
@@ -111,7 +96,6 @@ void _pop(stack_t1 **stack, unsigned int line_number)
 	stack_t1 *temp;
 	stack_t1 *first;
 
-	printf("pop function called\n");
 	first = *stack;
 	if (!first)
 	{
@@ -131,7 +115,6 @@ void _add(stack_t1 **stack, unsigned int line_number)
 	stack_t1 *temp;
 	int p, s;
 
-	printf("add function called\n");
 	temp = *stack;
 	if (!temp)
 	{
@@ -142,5 +125,5 @@ void _add(stack_t1 **stack, unsigned int line_number)
 	p = temp->n;
 	s = (temp->next)->n;
 
-	printf("%d", p + s);
+	printf("%d\n", p + s);
 }

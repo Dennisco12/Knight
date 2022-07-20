@@ -6,7 +6,7 @@ int int_check(char *str)
 
 	while (str[i])
 	{
-		if (str[i] < 48 && str[i] > 57)
+		if (str[i] < 48 || str[i] > 57)
 			return (0);
 		i++;
 	}

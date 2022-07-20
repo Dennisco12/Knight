@@ -40,11 +40,11 @@ typedef struct instruction_s
         void (*f)(stack_t1 **stack, unsigned int line_number);
 } instruction_t;
 
-extern char **push_args;
+extern char *push_args[50];
 
 char *read_file(char *filename);
-void tokenise(char *str, stack_t1 **stack, unsigned int line_number);
-void get_op(char **str, stack_t1 **stack);
+void tokenise(char *str, stack_t1 *stack, unsigned int line_number);
+void get_op(char **str, stack_t1 *stack);
 int push_func(char *token_line);
 int int_check(char *str);
 void freelist(stack_t1 *stack);

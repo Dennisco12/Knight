@@ -1,6 +1,6 @@
 #include "monty.h"
 
-char **push_args;
+//char **push_args;
 
 int main(int argc, char *argv[])
 {
@@ -18,24 +18,8 @@ int main(int argc, char *argv[])
 
 	stack = NULL;
 	buffer = read_file(argv[1]);
-	//printf("%s\n", buffer);
-	tokenise(buffer, &stack, line_number);
-	/*while (str)
-	{
-		push_arg[i] = str[i];
-		i++;
-	}*/
-	/*while (str->prev != NULL)
-		str = str->prev;*/
+	tokenise(buffer, stack, line_number);
 
-	/*while (str != NULL)
-	{
-		printf("%s\n", str->opcode);
-		str = str->next;
-	}*/
-	//get_op(str, stack, line_number);
-
-	printf("program completed\n");
 	freelist(stack);
 
 	return (0);
