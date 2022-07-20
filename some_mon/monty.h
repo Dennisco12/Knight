@@ -57,5 +57,8 @@ void _pint(stack_t1 **stack, unsigned int line_number);
 void _swap(stack_t1 **stack, unsigned int line_number);
 void _add(stack_t1 **stack, unsigned int line_number);
 void _sub(stack_t1 **stack, unsigned int line_number);
+void _div(stack_t1 **stack, unsigned int line_number);
+void _mul(stack_t1 **stack, unsigned int line_number);
+void _mod(stack_t1 **stack, unsigned int line_number);
 
 #endif

@@ -55,7 +55,9 @@ void tokenise(char *buffer, stack_t1 *stack, unsigned int line_number)
 			break;
 		}
 		str_arr[j] = strtok(line_arr[j], " ");
-		if (strcmp("push", str_arr[j]) == 0)
+		if (str_arr[j] == "#")
+			str_arr[j] = "nop";
+		else if (strcmp("push", str_arr[j]) == 0)
 		{
 			second = strtok(NULL, " ");
 			if (second == NULL || int_check(second) == 0)
@@ -84,6 +86,10 @@ void get_op(char **str, stack_t1 *stack)
 		{"pop", _pop},
 		{"add", _add},
 		{"sub", _sub},
+		{"div", _div},
+		{"mul", _mul},
+		{"mod", _mod},
+		{"nop", _nop},
 		{NULL, NULL},
 	};
 
