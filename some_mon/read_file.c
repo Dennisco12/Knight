@@ -55,7 +55,7 @@ void tokenise(char *buffer, stack_t1 *stack, unsigned int line_number)
 			break;
 		}
 		str_arr[j] = strtok(line_arr[j], " ");
-		if (str_arr[j] == "#")
+		if (str_arr[j][0] == '#')
 			str_arr[j] = "nop";
 		else if (strcmp("push", str_arr[j]) == 0)
 		{
