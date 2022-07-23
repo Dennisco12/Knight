@@ -1,29 +1,10 @@
 #include "monty.h"
 
-void _push(stack_t1 **stack, unsigned int line_number)
-{
-	stack_t1 *temp;
-	stack_t1 *new;
-	int n = 0;
-	char *arg;
-
-	temp = *stack;
-	new = malloc(sizeof(stack_t1));
-
-	arg = push_args[line_number - 1];
-	if (atoi(arg) == -1)
-	{
-		dprintf(2, "L%d: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-	new->n = atoi(arg);
-	new->prev = NULL;
-	new->next = temp;
-	if (temp != NULL)
-		temp->prev = new;
-
-	*stack = new;
-}
+/**
+ * _pall - A function that prints all the elements of a stack
+ * @stack: the doubly linked list
+ * @line_number: The line number of each command
+ */
 
 void _pall(stack_t1 **stack, unsigned int line_number)
 {
@@ -49,6 +30,13 @@ void _pall(stack_t1 **stack, unsigned int line_number)
 		temp = temp->next;
 	}
 }
+
+
+/**
+ * _swap - A function that swaps the first two elements of a stack
+ * @stack: A doubly linked list
+ * @line_number: The line number of each command
+ */
 
 void _swap(stack_t1 **stack, unsigned int line_number)
 {
@@ -77,6 +65,12 @@ void _swap(stack_t1 **stack, unsigned int line_number)
 	(head->next)->n = temp;
 }
 
+/**
+ * _pint - A function that prints only the top element of a stack
+ * @stack: A doubly linked list
+ * @line_number: The line number of each command
+ */
+
 void _pint(stack_t1 **stack, unsigned int line_number)
 {
 	stack_t1 *temp;
@@ -93,6 +87,13 @@ void _pint(stack_t1 **stack, unsigned int line_number)
 
 	printf("%d\n", temp->n);
 }
+
+
+/**
+ * _pop - A function that removes the top element of a stack
+ * @stack: A doubly linked list
+ * @line_number: The line number of each command
+ */
 
 void _pop(stack_t1 **stack, unsigned int line_number)
 {
@@ -112,6 +113,13 @@ void _pop(stack_t1 **stack, unsigned int line_number)
 
 	*stack = temp;
 }
+
+
+/**
+ * _add - A function that adds the top two elements in a stack
+ * @stack: The doubly linked list
+ * @line_number: The line number of each command
+ */
 
 void _add(stack_t1 **stack, unsigned int line_number)
 {
@@ -140,130 +148,4 @@ void _add(stack_t1 **stack, unsigned int line_number)
 	temp2->prev = NULL;
 	*stack = temp2;
 	temp->next = NULL;
-}
-
-void _sub(stack_t1 **stack, unsigned int line_number)
-{
-	stack_t1 *temp, *temp2;
-	int p, s;
-
-	temp = *stack;
-	temp2 = malloc(sizeof(stack_t1));
-	if (!temp2)
-	{
-		dprintf(2, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
-
-	if (temp == NULL || temp->next == NULL)
-	{
-		dprintf(2, "L%d: can't subtract, stack too short\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-
-	p = temp->n;
-	s = (temp->next)->n;
-
-	temp2->n = p - s;
-	temp2->next = (temp->next)->next;
-	temp2->prev = NULL;
-	*stack = temp2;
-	temp->next = NULL;
-}
-
-void _div(stack_t1 **stack, unsigned int line_number)
-{
-	stack_t1 *temp, *temp2;
-	int p, s;
-
-	temp = *stack;
-	if (temp == NULL || temp->next == NULL)
-	{
-		dprintf(2, "L%d: can't div, stack too short\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-
-	p = temp->n;
-	s = (temp->next)->n;
-
-	if (p == 0)
-	{
-		dprintf(2, "L%d: division by zero\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-	temp2 = malloc(sizeof(stack_t1));
-	if (temp2 == NULL)
-	{
-		dprintf(2, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
-
-	temp2->n = s / p;
-	temp2->next = (temp->next)->next;
-	temp2->prev = NULL;
-	*stack = temp2;
-	temp->next = NULL;
-}
-
-void _mul(stack_t1 **stack, unsigned int line_number)
-{
-	stack_t1 *temp, *temp2;
-	int p, s;
-
-	temp = *stack;
-	if (temp == NULL || temp->next ==NULL)
-	{
-		dprintf(2, "L%d: can;t mul, stack too short\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-
-	p = temp->n;
-	s = (temp->next)->n;
-
-	temp2 = malloc(sizeof(stack_t1));
-	if (!temp2)
-	{
-		dprintf(2, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
-
-	temp2->n = p * s;
-	temp2->next = (temp->next)->next;
-	temp2->prev = NULL;
-	*stack = temp2;
-	temp->next = NULL;
-}
-
-void _mod(stack_t1 **stack, unsigned int line_number)
-{
-	stack_t1 *temp, *temp2;
-	int p, s;
-
-	temp = *stack;
-	if (temp == NULL || temp->next ==NULL)
-	{
-		dprintf(2, "L%d: can;t mod, stack too short\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-
-	p = temp->n;
-	s = (temp->next)->n;
-
-	temp2 = malloc(sizeof(stack_t1));
-	if (!temp2)
-	{
-		dprintf(2, "Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
-
-	temp2->n = s % p;
-	temp2->next = (temp->next)->next;
-	temp2->prev = NULL;
-	*stack = temp2;
-	temp->next = NULL;
-}
-
-void _nop(stack_t1 **stack, unsigned int line_number)
-{
-	return;
 }

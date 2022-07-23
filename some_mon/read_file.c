@@ -1,5 +1,10 @@
 #include "monty.h"
 
+/**
+ * read_file - A function that reads into a file
+ * @filename: The name of the file to be read
+ * Return: The content of the file in a buffer
+ */
 char *read_file(char *filename)
 {
 	int fd, bytes_read;
@@ -19,30 +24,41 @@ char *read_file(char *filename)
 		dprintf(2, "%s file is empty\n", filename);
 		exit(EXIT_FAILURE);
 	}
-	close (fd);
+	close(fd);
 	return (buffer);
 }
 
 char *push_args[50];
 
+/**
+ * tokenise - A function that tokenise its arguments
+ * into single commands and put these commands in an array
+ * @buffer: The string to be tokenised
+ * @stack: a doubly linked list
+ * @line_number: The line number for each command
+ */
+
 void tokenise(char *buffer, stack_t1 *stack, unsigned int line_number)
 {
 	char *token_line;
 	char *token_str;
-	instruction_t func;
 	char *line_arr[50];
 	char *str_arr[50];
-	int j = 0, n = 0;
+	int j = 1, n = 0;
 	char *second;
-	char *k = "-1", arg;
+	char *k = "-1";
 
 	line_number = 1;
 	token_line = strtok(buffer, "\n");
-	line_arr[j] = token_line;
-	j++;
+	line_arr[0] = token_line;
 	while (token_line)
 	{
 		token_line = strtok(NULL, "\n");
+		if (token_line[0] == '#')
+		{
+			j++;
+			continue;
+		}
 		line_arr[j] = token_line;
 		j++;
 	}
@@ -55,9 +71,7 @@ void tokenise(char *buffer, stack_t1 *stack, unsigned int line_number)
 			break;
 		}
 		str_arr[j] = strtok(line_arr[j], " ");
-		if (str_arr[j][0] == '#')
-			str_arr[j] = "nop";
-		else if (strcmp("push", str_arr[j]) == 0)
+		if (strcmp("push", str_arr[j]) == 0)
 		{
 			second = strtok(NULL, " ");
 			if (second == NULL || int_check(second) == 0)
@@ -70,9 +84,14 @@ void tokenise(char *buffer, stack_t1 *stack, unsigned int line_number)
 		j++;
 	}
 	get_op(str_arr, stack);
-	return;
 }
 
+/**
+ * get_op - A function that takes string and fetches its corresponding
+ * function
+ * @str: The string input
+ * @stack: A doubly linked list
+ */
 void get_op(char **str, stack_t1 *stack)
 {
 	int i = 0;
@@ -114,5 +133,4 @@ void get_op(char **str, stack_t1 *stack)
 		j++;
 	}
 	freelist(stack);
-	return;
 }

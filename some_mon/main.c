@@ -1,7 +1,11 @@
 #include "monty.h"
 
-//char **push_args;
-
+/**
+ * main - entry point
+ * @argc: arg count
+ * @argv: arg vector
+ * Return: always 0
+ */
 int main(int argc, char *argv[])
 {
 	if (argc != 2)
