@@ -1,0 +1,16 @@
+header {
+    height: 70px; 
+    width: 100%;
+    border-bottom: 1px solid #CCCCCC;
+    background: white url(../images/logo.png);
+    background-repeat: no-repeat;
+    background-position: 20px center;
+    flex-shrink: 0;
+}
+header #api_status {
+	align-items: right;
+	border-radius: 100%;
+	position: absolute;
+	border-right: 30px;
+	background-color: #cccccc;
+}
