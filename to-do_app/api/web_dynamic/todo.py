@@ -11,9 +11,12 @@ app = Flask(__name__)
 
 @app.route('/todo/', strict_slashes=False)
 def todo():
-    tasks = storage.all(Task).values()
-    tasks = sorted(tasks, key=lambda k: k.title)
-    categories = storage.all(Category).values()
+    categories = []
+    tasks = []
+    for k, v in storage.all(Task).items():
+        tasks.append(v.to_dict())
+    for k, v in storage.all(Category).items():
+        categories.append(v)
     users = storage.all(User).values()
     username_list = []
     for user in users:
