@@ -7,20 +7,20 @@ from models.category import Category
 user2 = User(username='Dennis')
 category2 = Category(name='general')
 
-print('user2 has id of {}'.format(user2.id))
-print('category2 has id of {}'.format(category2.id))
-
 print()
-print(user2.__dict__)
-print(user2.to_dict())
 user2.save()
 category2.save()
 
 new_dict = {}
 new_dict['email'] = 'akinwonjowodennisco@gmail.com'
 new_dict['password'] = 'Password123'
-new_dict['category_id'] = category2.id
+
+dict_2 = {}
+dict_2['user_id'] = user2.id
+dict_2['description'] = "This contains all my general tasks"
 
 user2.update(**new_dict)
+category2.update(**dict_2)
 print()
 print(user2)
+print(category2)

@@ -4,7 +4,7 @@ from api.blueprint import app_views
 from models.storage import storage
 from models.task import Task
 from models.category import Category
-from flask import jsonify, abort
+from flask import jsonify, abort, request, make_response
 
 @app_views.route('/tasks', strict_slashes=False, methods=['GET'])
 def all_tasks():
@@ -58,7 +58,7 @@ def create_task():
         abort(400, "No selcted category")
     elif 'user_id' not in request.json:
         abort(400, "No selected user")
-    request_dict = request.get_json
+    request_dict = request.get_json()
     prototype = Task(**request_dict)
     prototype.save()
     return make_response(jsonify(prototype.to_dict()))
