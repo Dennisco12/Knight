@@ -8,15 +8,17 @@ class FileStorage:
     __filepath = "todo.json"
 
     def all(self, cls=None):
-        all_obj = {}
-        for k, v in type(self).__objects.items():
-            if cls == None or cls in k.split('.'):
-                all_obj[k] = v
-
-        return all_obj
+        if cls is None:
+            return type(self).__objects
+        else:
+            temp = {}
+            for key, val in type(self).__objects.items():
+                if cls.__name__ in key:
+                    temp[key] = val
+            return temp
 
     def new(self, obj):
-        new_key = obj.to_dict()['class'] + '.' + obj.to_dict()['id']
+        new_key = obj.to_dict()['__class__'] + '.' + obj.id
         type(self).__objects[new_key] = obj
 
     def save(self):
@@ -27,23 +29,22 @@ class FileStorage:
             json.dump(all_obj, f)
 
     def reload(self):
-        from user import User
-        from category import Category
-        from task import Task
+        from models.user import User
+        from models.category import Category
+        from models.task import Task
         try:
-            with open(type(self).__filepath) as f:
+            with open(type(self).__filepath, 'r', encoding='utf-8') as f:
                 content = json.load(f)
 
-            for k, v in content.items():
-                if 'User' in k.split('.'):
-                    prototype = User(**v)
-                elif 'Category' in k.split('.'):
-                    prototype = Category(**v)
-                elif 'Task' in k.split('.'):
-                    prototype = Task(**v)
-                key = prototype.__class__.__name__ + '.' + prototype.id
-                type(self).__objects[key] = prototype
-        except Exception:
+                for k, v in content.items():
+                    if 'User' in k.split('.'):
+                        prototype = User(**v)
+                    elif 'Category' in k.split('.'):
+                        prototype = Category(**v)
+                    elif 'Task' in k.split('.'):
+                        prototype = Task(**v)
+                    type(self).__objects[k] = prototype
+        except FileNotFoundError as e:
             pass
 
     def delete(self, obj):
