@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Dennis Todo</title>
+	</head>
+	<body>
+		<header>Welcome {{ users[0] }}</header>
+		<hr>
+		<ul>
+			{% for category in categories %}
+<<<<<<< HEAD
+			<li><h4>{{ category.name }}</h4>{{ category.id }}</li>
+			<ul>
+				{% for task in tasks %}
+				{% if task.category_id == category.id %}
+				<li><h6><b>{{ task.title }}:</b></h6></br>   {{ task.description }}<p>{{ task.category_id }}</li>
+				{% endif %}
+				{% endfor %}
+			</ul>
+=======
+			<li>
+				<h4>{{ category.name }}</h4>
+				<ul>
+					{% for task in tasks %}
+					{% if task['category_id'] == category.id %}
+					<li>
+						<h6><b>{{ task.title }}:</b></br>   {{ task.description }}</h6>
+					</li>
+					{% endif %}
+					{% endfor %}
+				</ul>
+			</li>
+>>>>>>> 1f75dbec465e3257a0eb8c91580428825d3bd53d
+			{% endfor %}
+		</ul>
+	</body>
+</html>
