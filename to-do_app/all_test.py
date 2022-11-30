@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 from models.storage import storage
-<<<<<<< HEAD
 from models.category import Category
 from models.user import User
 from models.task import Task
@@ -67,12 +66,3 @@ if __name__ == "__main__":
     task2.save()
     task3.save()
     task4.save()
-=======
-from models.task import Task
-
-if __name__ == "__main__":
-    cats = []
-    for k, v in storage.all(Task).items():
-        cats.append(v.to_dict())
-    print(cats)
->>>>>>> 1f75dbec465e3257a0eb8c91580428825d3bd53d
