@@ -1,8 +1,8 @@
 #!/usr/bin/node
 $('document').ready(function () {
 	const api = 'http://' + window.location.hostname;
-	$(button.add).click( () => {
-		$(div.form).html('<input class="title"></input><input class="description"></input>')
+	$('button.add').click( () => {
+		$('div.form').html('<input class="title"></input><input class="description"></input>')
 }
 
 $.ajax({
