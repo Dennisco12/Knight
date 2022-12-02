@@ -4,12 +4,12 @@ $('document').ready(function () {
 	$('button.add').click( () => {
 		$('div.form').append('<p>Title: <input class="title"></p><p>Description: </input><input class="description"></input></p><button class="submit"></button>')
 	});
-	const title = $('div.form input.title').val
-	const description = $('div.form input.description').val
-	$('div.form button.submit').click( () => {
-		const myDict = {title: decription};
-		function addTask(myDict)
-	});
+});
+const title = $('div.form input.title').val
+const description = $('div.form input.description').val
+$('div.form button.submit').click( () => {
+	const myDict = {title: decription};
+	function addTask(myDict)
 });
 
 $('div.form button.submit').click(addTask(myDict) {
