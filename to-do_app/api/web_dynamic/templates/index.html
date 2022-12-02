@@ -4,6 +4,8 @@
 		<meta charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="../styles/style.css">
 		<title>Dennis Todo</title>
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script>src="../styles/script.js"</script>
 	</head>
 	<body>
 		<header>Welcome {{ users[0] }}</header>
@@ -20,5 +22,7 @@
 			</ul>
 			{% endfor %}
 		</ul>
+		<div>
+			<button class="add">Add task</button>
 	</body>
 </html>
