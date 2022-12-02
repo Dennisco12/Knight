@@ -2,6 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
+		<link href="../styles/style.css"/>
 		<title>Dennis Todo</title>
 	</head>
 	<body>
@@ -9,8 +10,8 @@
 		<hr>
 		<ul>
 			{% for category in categories %}
-			<li><h4>{{ category.name }}</h4>{{ category.id }}</li>
-			<ul>
+			<li><h4>{{ category.name }}</h4></li>
+			<ul class="container">
 				{% for task in tasks %}
 				{% if task.category_id == category.id %}
 				<li><h6><b>{{ task.title }}:</b></h6></br>   {{ task.description }}</li>
