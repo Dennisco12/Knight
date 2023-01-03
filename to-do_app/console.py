@@ -80,6 +80,23 @@ class TodoCommand(cmd.Cmd):
             print("Object not found")
             return False
 
+    def do_destroy(self, args):
+        """removes an instance from storage"""
+        if not args:
+            print("* Enter a class name *")
+            return False
+        arg = args.split()
+        if len(arg) < 2:
+            print("* Enter an id *")
+            return False
+        search_key = arg[0] + '.' + arg[1]
+        for k, obj in type(self).objs.items():
+            if k == search_key:
+                del storage.all()[k]
+                storage.save()
+                return
+        return False
+
 
 
 if __name__ == "__main__":

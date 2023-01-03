@@ -9,7 +9,7 @@ from models.task import Task
 app = Flask(__name__)
 
 
-@app.route('/todo/', strict_slashes=False)
+@app.route('/todo', strict_slashes=False)
 def todo():
     categories = []
     tasks = []
@@ -28,4 +28,4 @@ def todo():
                             users=username_list)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=8001)

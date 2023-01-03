@@ -1,23 +1,30 @@
 #!/usr/bin/node
-$('document').ready(function () {
-	const api = 'http://' + window.location.hostname;
-	$('button.add').click( () => {
-		$('div.form').append('<p>Title: <input class="title"></p><p>Description: </input><input class="description"></input></p><button class="submit"></button>')
+$(function (){
+	$('#add_button').click( () => {
+		$('#form').html('<p>Title: <input id="title" placeholder="Title"></p><p>Description: <input id="description" placeholder="Description"></input></p><button id="submitb">Create Task</button>')
 	});
 });
-const title = $('div.form input.title').val
-const description = $('div.form input.description').val
-$('div.form button.submit').click( () => {
-	const myDict = {title: decription};
-	function addTask(myDict)
-});
+const title = $('#title').val()
+const description = $('#description').val()
 
-$('div.form button.submit').click(addTask(myDict) {
+$('#submitb').click( () => {
+	var myDict = {
+		"title": title,
+		"description": description,
+		"category_id": 358b348c-2cbf-4c04-bfbf-06a442db5913,
+		"user_id": ec3aae58-091b-4672-8670-99fec089052f,
+	};
 	$.ajax({
-		url: api + ':5000/api/tasks',
 		type: 'POST',
+		url: 'http://0.0.0.0:8000/todo/tasks',
 		data: JSON.stringify(myDict),
 		contentType: 'application/json',
 		dataType: 'json',
+		success: function(newDict) {
+			alert(newDict.title + ' has been created successfully');
+		},
+		error: function() {
+			alert("An error has occured");
+		},
 	});
 });

@@ -2,10 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" type="text/css" href="../static/styles/style.css">
 		<title>Dennis Todo</title>
-		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-		<script src="../static/styles/script.js"></script>
 	</head>
 	<body>
 		<header>Welcome {{ users[0] }}</header>
@@ -16,13 +13,16 @@
 			<ul class="container">
 				{% for task in tasks %}
 				{% if task.category_id == category.id %}
-				<li><h6><b>{{ task.title }}:</b></h6></br>   {{ task.description }}</li>
+				<li><h6><b>{{ task.title }}:</b></h6>	 {{ task.description }}</li>
 				{% endif %}
 				{% endfor %}
 			</ul>
 			{% endfor %}
 		</ul>
-		<button class="add">Add task</button>
-		<div class="form"></div>
+		<button id="add_button">Add task</button>
+		<div id="form"></div>
+
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="{{ url_for('static', filename='styles/script.js') }}"></script>
 	</body>
 </html>
